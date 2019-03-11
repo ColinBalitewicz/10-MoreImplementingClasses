@@ -3,8 +3,8 @@ A   CapitalT   class and functions that use/test it.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Colin Balitewicz.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -20,10 +20,10 @@ def main():
     print('Un-comment the calls in MAIN one by one')
     print(' to run the testing code as you complete the TODOs.')
 
-    # run_test_simple_t()
-    # run_test_set_colors()
-    # run_test_move_by()
-    # run_test_clone()
+    run_test_simple_t()
+    run_test_set_colors()
+    run_test_move_by()
+    run_test_clone()
 
 
 def run_test_simple_t():
@@ -162,7 +162,7 @@ class CapitalT(object):
           :type letter_thickness:    int
         """
         # ---------------------------------------------------------------------
-        # TODO: 3.
+        # DONE: 3.
         #   READ the above specification, including the Example.
         #   Implement this method, using the instance variables
         #      h_rect
@@ -170,8 +170,16 @@ class CapitalT(object):
         #   and *** NO OTHER INSTANCE VARIABLES. ***
         #   Note: Implement   attach_to   before testing this __init__ method.
         # ---------------------------------------------------------------------
+        self.intersection_center=intersection_center
+        self.width=width
+        self.height=height
+        self.letter_thickness=letter_thickness
+        self.h_rect=rg.Rectangle(rg.Point(self.intersection_center.x-width/2,self.intersection_center.y-self.letter_thickness/2),rg.Point(self.intersection_center.x+width/2,self.intersection_center.y+self.letter_thickness/2))
+        self.v_rect=rg.Rectangle(rg.Point(self.intersection_center.x-self.letter_thickness/2,self.intersection_center.y-self.letter_thickness/2),rg.Point(self.intersection_center.x+self.letter_thickness/2,self.intersection_center.y+(self.height-self.letter_thickness/2)))
 
     def attach_to(self, window):
+        self.v_rect.attach_to(window)
+        self.h_rect.attach_to(window)
         """
         What comes in:
            -- self
@@ -190,7 +198,7 @@ class CapitalT(object):
           :type window: rg.RoseWindow
         """
         # ---------------------------------------------------------------------
-        # TODO: 4.
+        # DONE: 4.
         #   READ the above specification, including the Example.
         #   Implement this method, then TEST it by:
         #     a. Un-comment the call to its test function, in main.  Run.
@@ -200,6 +208,10 @@ class CapitalT(object):
         # ---------------------------------------------------------------------
 
     def set_colors(self, fill_color, outline_color):
+        self.v_rect.fill_color=fill_color
+        self.h_rect.fill_color=fill_color
+        self.v_rect.outline_color=outline_color
+        self.h_rect.outline_color=outline_color
         """
         What comes in:
           -- self
@@ -222,7 +234,7 @@ class CapitalT(object):
           :type outline_color: str
         """
         # ---------------------------------------------------------------------
-        # TODO: 5.
+        # DONE: 5.
         #   READ the above specification, including the Example.
         #   Implement this method, then TEST it by:
         #     a. Un-comment the call to its test function, in main.  Run.
@@ -232,6 +244,14 @@ class CapitalT(object):
         # ---------------------------------------------------------------------
 
     def move_by(self, dx, dy):
+        self.h_rect.corner_1.x=self.h_rect.corner_1.x+dx
+        self.h_rect.corner_1.y=self.h_rect.corner_1.y+dy
+        self.h_rect.corner_2.x=self.h_rect.corner_2.x+dx
+        self.h_rect.corner_2.y=self.h_rect.corner_2.y+dy
+        self.v_rect.corner_1.x=self.v_rect.corner_1.x+dx
+        self.v_rect.corner_1.y=self.v_rect.corner_1.y+dy
+        self.v_rect.corner_2.x=self.v_rect.corner_2.x+dx
+        self.v_rect.corner_2.y=self.v_rect.corner_2.y+dy
         """
         What comes in:
            -- self
@@ -255,7 +275,7 @@ class CapitalT(object):
           :type dy: int
         """
         # ---------------------------------------------------------------------
-        # TODO: 6.
+        # DONE: 6.
         #   READ the above specification, including the Example.
         #   Implement this method, then TEST it by:
         #     a. Un-comment the call to its test function, in main.  Run.
@@ -268,6 +288,7 @@ class CapitalT(object):
         # ---------------------------------------------------------------------
 
     def clone(self):
+        return CapitalT(self.intersection_center, self.width, self.height, self.letter_thickness)
         """
         What comes in:
           -- self
@@ -288,7 +309,7 @@ class CapitalT(object):
           :rtype: CapitalT
         """
         # ---------------------------------------------------------------------
-        # TODO: 7.
+        # DONE: 7.
         #   READ the above specification, including the Example.
         #   Implement this method, then TEST it by:
         #     a. Un-comment the call to its test function, in main.  Run.
